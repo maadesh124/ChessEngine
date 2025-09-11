@@ -1,0 +1,18 @@
+paste this to .gitignore before push to master
+
+
+.vscode/
+node_modules/
+att.txt
+package-lock.json
+package.json
+valid.txt
+internals/att.txt
+internals/Driver.txt
+internals/Driver1.txt
+internals/input.txt
+internals/test.js
+internals/valid.txt
+gitignore.txt
+internals/Visualizer.js
+
