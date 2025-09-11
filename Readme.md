@@ -65,7 +65,8 @@ game.promote([0, 0], "Queen");
 
 ### `whoseTurn()`
 
-Returns whose turn it is (`"White"` or `"Black"`).
+Returns whose turn it is (`0` or `1`).
+0 for white and 1 for black
 
 Example:
 
@@ -78,7 +79,7 @@ console.log(game.whoseTurn()); // "White"
 ### `getBoardState()`
 
 Returns the current board as a 2D array (8×8).
-Each cell contains either `null` or a string like `"PawnWhite"`, `"KingBlack"`, etc.
+Each cell contains either `null` or a string like `"Pawn0"`, `"King1"`, etc.
 
 Example:
 
@@ -89,8 +90,6 @@ console.log(game.getBoardState());
 ---
 
 ## 🔢 Static Status Codes
-
-The class re-exports status codes from the underlying `Board`:
 
 - `Chess.INVALID_MOVE`
 - `Chess.ILLEGAL_MOVE`
