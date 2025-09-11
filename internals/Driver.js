@@ -68,7 +68,7 @@ async function playFromFile(path) {
 }
 
 async function main() {
-  fs.writeFileSync("input.txt", "", "utf-8");
+  fs.writeFileSync(out, "", "utf-8");
   while (await play());
   rl.close();
 
