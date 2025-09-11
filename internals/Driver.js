@@ -1,26 +1,28 @@
 import readline from "readline/promises";
 import { stdin as input, stdout as output } from "process";
 import Board from "./Board.js";
+import Chess from "../Chess.js";
 import fs from "fs";
 import { drawBoard } from "./Visualizer.js";
 
+const out = "./lastGame.txt";
 const rl = readline.createInterface({ input, output });
-let game = new Board();
+let game = new Chess();
 let movesPlayed = "";
 async function play() {
-  console.log(`${game.play} 's turn`);
+  console.log(`${game.whoseTurn()} 's turn`);
   let input = await rl.question("src=");
-  fs.appendFileSync("input.txt", input + "\n", "utf-8");
+  fs.appendFileSync(out, input + "\n", "utf-8");
   if (input === "q") return false;
   input = parseInt(input);
   const src = [Math.floor(input / 10), input % 10];
   input = await rl.question("dst=");
-  fs.appendFileSync("input.txt", input + "\n", "utf-8");
+  fs.appendFileSync(out, input + "\n", "utf-8");
   const dst = [Math.floor(input / 10), input % 10];
 
   console.log(`src=${src[0]} ,${src[1]}  dst=${dst[0]} ,${dst[1]}`);
   let res = game.move(src, dst);
-  drawBoard(game, 7, 3.5);
+  drawBoard(game.getBoardState(), 7, 3.5);
   console.log(`result=${res}`);
   if (res === Board.PROMOTE) {
     let prom = await rl.question("Promtion Piece=");
@@ -44,7 +46,7 @@ function readFileAsInts(filePath) {
 }
 
 async function playFromFile(path) {
-  const arr = readFileAsInts("./input.txt");
+  const arr = readFileAsInts(path);
   let src = [],
     dst = [];
   let k1 = 0,
@@ -54,13 +56,13 @@ async function playFromFile(path) {
     else dst[k2++] = arr[i];
 
   for (let i = 0; i < src.length; i++) {
-    console.log(`\n${game.play}'s play *****`);
+    console.log(`\n${game.whoseTurn()}'s play *****`);
     console.log(`do you want to move ${src[i]}-->${dst[i]}`);
     const s = [Math.floor(src[i] / 10), src[i] % 10];
     const t = [Math.floor(dst[i] / 10), dst[i] % 10];
     await rl.question("Press Any key");
     let res = game.move(s, t);
-    drawBoard(game, 7, 3.5);
+    drawBoard(game.getBoardState(), 7, 3.5);
     console.log(`result= ${res}`);
   }
 }
@@ -69,6 +71,8 @@ async function main() {
   fs.writeFileSync("input.txt", "", "utf-8");
   while (await play());
   rl.close();
+
+  //playFromFile("./input.txt");
 }
 
 try {
