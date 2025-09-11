@@ -44,8 +44,9 @@ export default class Piece {
   }
 
   moveTo(board, dst) {
-    board.pieces[dst[0]][dst[1]] = this;
     board.pieces[this.x][this.y] = null;
+    board.pieces[dst[0]][dst[1]] = this;
+
     this.x = dst[0];
     this.y = dst[1];
 
@@ -65,7 +66,7 @@ export default class Piece {
       this.moveTo(board, dst);
       const hasCheck = board.isCheck(this.color);
       this.moveTo(board, src);
-      dstPiece.moveTo(board, dst);
+      if (dstPiece !== null) dstPiece.moveTo(board, dst);
       // board.pieces[dst[0]][dst[1]] = dstPiece;
       if (!hasCheck) valids.push(dst);
     }

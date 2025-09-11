@@ -32,7 +32,8 @@ export default class Pawn extends Piece {
       this.moveTo(board, dst);
       const hasCheck = board.isCheck(this.color);
       this.moveTo(board, src);
-      board.pieces[dst[0]][dst[1]] = dstPiece;
+      if (dstPiece !== null) dstPiece.moveTo(board, dst);
+
       if (!hasCheck) valids.push(dst);
     }
 
@@ -47,7 +48,8 @@ export default class Pawn extends Piece {
     this.moveTo(board, dst);
     let hasCheck = board.isCheck(this.color);
     this.moveTo(board, src);
-    board.pieces[dst[0]][dst[1]] = piece;
+    if (piece !== null) piece.moveTo(board, dst);
+
     if (!hasCheck) valids.push(dst);
 
     if (this.y !== startRow) return valids;
@@ -60,7 +62,7 @@ export default class Pawn extends Piece {
     this.moveTo(board, dst);
     hasCheck = board.isCheck(this.color);
     this.moveTo(board, src);
-    board.pieces[dst[0]][dst[1]] = piece;
+    if (piece !== null) piece.moveTo(board, dst);
     if (!hasCheck) valids.push(dst);
 
     return valids;
