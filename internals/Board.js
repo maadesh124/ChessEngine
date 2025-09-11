@@ -65,8 +65,8 @@ export default class Board {
     this.kings[0] = this.pieces[4][0]; // white king
     this.kings[1] = this.pieces[4][7]; // black king
 
-    logAllPiece(this);
-    logAllPiece(this, true);
+    //logAllPiece(this);
+    //logAllPiece(this, true);
   }
 
   move(src, dst) {
@@ -101,8 +101,8 @@ export default class Board {
     piece.moveTo(this, dst);
 
     // this.updateAttackSquaresAll(piece);
-    logAllPiece(this);
-    logAllPiece(this, true);
+    //logAllPiece(this);
+    //logAllPiece(this, true);
 
     if (piece.constructor.name === "Rook" || piece.constructor.name === "King")
       piece.moved = true;
