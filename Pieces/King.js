@@ -39,7 +39,7 @@ export default class King extends Piece {
 
     const dx = rookX < this.x ? -1 : 1;
     for (let x = this.x + dx; x !== rookX; x += dx) {
-      if (board.pieces[x][rank] !== null) return false;
+      if (board.pieces[x][rank] != null) return false;
     }
 
     let kingX = this.x;

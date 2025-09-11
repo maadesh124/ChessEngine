@@ -6,22 +6,29 @@ import { drawBoard } from "./Visualizer.js";
 
 const rl = readline.createInterface({ input, output });
 let game = new Board();
+let movesPlayed = "";
 async function play() {
   console.log(`${game.play} 's turn`);
   let input = await rl.question("src=");
+  fs.appendFileSync("input.txt", input + "\n", "utf-8");
   if (input === "q") return false;
   input = parseInt(input);
   const src = [Math.floor(input / 10), input % 10];
   input = await rl.question("dst=");
+  fs.appendFileSync("input.txt", input + "\n", "utf-8");
   const dst = [Math.floor(input / 10), input % 10];
 
   console.log(`src=${src[0]} ,${src[1]}  dst=${dst[0]} ,${dst[1]}`);
   let res = game.move(src, dst);
   drawBoard(game, 7, 3.5);
-
-  console.log(`print= ${game.pieces[src[0]][src[1]]}`);
-
   console.log(`result=${res}`);
+  if (res === Board.PROMOTE) {
+    let prom = await rl.question("Promtion Piece=");
+    res = game.promote(dst, prom);
+    drawBoard(game, 7, 3.5);
+    console.log(`result=${res}`);
+  }
+
   return true;
 }
 
@@ -59,6 +66,7 @@ async function playFromFile(path) {
 }
 
 async function main() {
+  fs.writeFileSync("input.txt", "", "utf-8");
   while (await play());
   rl.close();
 }

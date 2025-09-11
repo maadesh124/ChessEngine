@@ -16,6 +16,9 @@ export default class Board {
   static CHECKMATE = "CHECKMATE";
   static WRONG_PLAY = "WRONG_PLAY";
   static STALE_MATE = "STALE_MATE";
+  static INVALID_PROMOTION = "INVALID_PROMOTION";
+  static VALID_PROMOTION = "VALID_PROMOTION";
+  static PROMOTE = "PROMOTE";
   constructor() {
     this.pieces = Array.from({ length: 8 }, () => Array(8).fill(null));
     // White back rank (y=0)
@@ -76,14 +79,14 @@ export default class Board {
       return Board.WRONG_PLAY;
 
     if (
-      this.pieces[dst[0]][dst[1]] !== null &&
+      this.pieces[dst[0]][dst[1]] != null &&
       this.pieces[dst[0]][dst[1]].constructor.name === "King"
     ) {
       return Board.INVALID_MOVE;
     }
 
     if (
-      this.pieces[dst[0]][dst[1]] !== null &&
+      this.pieces[dst[0]][dst[1]] != null &&
       piece.color === this.pieces[dst[0]][dst[1]].color
     )
       return Board.INVALID_MOVE;
@@ -96,6 +99,7 @@ export default class Board {
     if (!piece.isValidMove(this, dst)) return Board.INVALID_MOVE;
 
     piece.moveTo(this, dst);
+
     // this.updateAttackSquaresAll(piece);
     logAllPiece(this);
     logAllPiece(this, true);
@@ -108,7 +112,8 @@ export default class Board {
     if (isMate === 2) return Board.STALE_MATE;
 
     this.play = (this.play + 1) % 2;
-
+    if (piece.constructor.name === "Pawn" && piece.canPromote())
+      return Board.PROMOTE;
     return Board.VALID_MOVE;
   }
 
@@ -117,7 +122,7 @@ export default class Board {
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 8; j++) {
         let piece = this.pieces[i][j];
-        if (piece === null || piece.color === color) continue;
+        if (piece == null || piece.color === color) continue;
         if (piece.canAttack(kingSq)) return true;
       }
     }
@@ -131,7 +136,7 @@ export default class Board {
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 8; j++) {
         let piece = this.pieces[i][j];
-        if (piece === null || piece.color !== color) continue;
+        if (piece == null || piece.color !== color) continue;
         let valids = piece.getAllValidMoves(this);
         if (valids.length > 0) {
           hasValidMove = true;
@@ -151,9 +156,19 @@ export default class Board {
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 8; j++) {
         let piece = this.pieces[i][j];
-        if (piece === null || !piece.isSlidingPiece()) continue;
+        if (piece == null || !piece.isSlidingPiece()) continue;
         piece.updateAttackSquares(this);
       }
     }
+  }
+
+  promote(src, promotionPiece = "Queen") {
+    if (!isValid(src)) return Board.INVALID_PROMOTION;
+    let pawn = this.pieces[src[0]][src[1]];
+    if (pawn == null || pawn.constructor.name !== "Pawn")
+      return Board.INVALID_PROMOTION;
+    if (!pawn.canPromote()) return Board.INVALID_PROMOTION;
+    pawn.replaceWith(this, promotionPiece);
+    return Board.VALID_PROMOTION;
   }
 }

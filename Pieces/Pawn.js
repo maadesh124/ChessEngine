@@ -1,5 +1,8 @@
 import Piece from "./Piece.js";
 import { isValid } from "../Helper.js";
+import Queen from "./Queen.js";
+import Knight from "./Knight.js";
+import Bishop from "./Bishop.js";
 
 export default class Pawn extends Piece {
   constructor(color, x, y) {
@@ -22,7 +25,7 @@ export default class Pawn extends Piece {
 
       let piece = board.pieces[dst[0]][dst[1]];
       if (
-        piece === null ||
+        piece == null ||
         piece.constructor.name === "King" ||
         piece.color === this.color
       )
@@ -32,7 +35,7 @@ export default class Pawn extends Piece {
       this.moveTo(board, dst);
       const hasCheck = board.isCheck(this.color);
       this.moveTo(board, src);
-      if (dstPiece !== null) dstPiece.moveTo(board, dst);
+      if (dstPiece != null) dstPiece.moveTo(board, dst);
 
       if (!hasCheck) valids.push(dst);
     }
@@ -48,7 +51,7 @@ export default class Pawn extends Piece {
     this.moveTo(board, dst);
     let hasCheck = board.isCheck(this.color);
     this.moveTo(board, src);
-    if (piece !== null) piece.moveTo(board, dst);
+    if (piece != null) piece.moveTo(board, dst);
 
     if (!hasCheck) valids.push(dst);
 
@@ -62,9 +65,30 @@ export default class Pawn extends Piece {
     this.moveTo(board, dst);
     hasCheck = board.isCheck(this.color);
     this.moveTo(board, src);
-    if (piece !== null) piece.moveTo(board, dst);
+    if (piece != null) piece.moveTo(board, dst);
     if (!hasCheck) valids.push(dst);
 
     return valids;
+  }
+
+  canPromote() {
+    return (
+      (this.color === 0 && this.y === 7) || (this.color === 1 && this.y === 0)
+    );
+  }
+  replaceWith(board, type = "Queen") {
+    let newPiece;
+    if (type === "Queen") newPiece = new Queen(this.color, this.x, this.y);
+    else if (type === "Rook") newPiece = new Rook(this.color, this.x, this.y);
+    else if (type === "Knight")
+      newPiece = new Knight(this.color, this.x, this.y);
+    else if (type === "Bishop")
+      newPiece = new Bishop(this.color, this.x, this.y);
+    else
+      throw new Error(
+        `received=${type} Promotion error piece must be a Queen ,Rook,Knight or Bishop`
+      );
+
+    newPiece.moveTo(board, [this.x, this.y]);
   }
 }
