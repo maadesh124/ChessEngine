@@ -1,0 +1,13 @@
+Use this before pushing to master
+
+node_modules/
+.vscode/
+package-lock.json
+package.json
+internals/att.txt
+internals/Driver.js
+internals/Driver1.js
+internals/input.txt
+internals/test.js
+internals/valid.txt
+internals/Visualizer.js
