@@ -40,7 +40,7 @@ export default class Chess {
   whoseTurn() {
     return this.#board.play;
   }
-  //get Board state
+
   getBoardState() {
     const state = Array.from({ length: 8 }, () => Array(8).fill(null));
     for (let y = 0; y < 8; y++) {
