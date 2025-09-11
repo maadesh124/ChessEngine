@@ -7,82 +7,83 @@
 Piece(white Rook, 0, 0)
 
 Piece(white Knight, 1, 0)
+2
+22
 
 Piece(white Bishop, 2, 0)
 
-Piece(white Queen, 3, 0)
-
 Piece(white King, 4, 0)
+30
+41
 
-Piece(white Rook, 5, 0)
+Piece(white Bishop, 5, 0)
+41
+32
+23
+14
+5
+
+Piece(white Knight, 6, 0)
+52
+72
+41
+
+Piece(white Rook, 7, 0)
 
 
 *************Line number=1 *************
 
 
 Piece(white Pawn, 0, 1)
+2
+3
 
 Piece(white Pawn, 1, 1)
+12
+13
 
 Piece(white Pawn, 2, 1)
+22
+23
 
 Piece(white Pawn, 3, 1)
-
-Piece(white Bishop, 4, 1)
+32
+33
 
 Piece(white Pawn, 5, 1)
+52
+53
+
+Piece(white Pawn, 6, 1)
+62
+63
 
 Piece(white Pawn, 7, 1)
+72
+73
 
 
 *************Line number=2 *************
 
 
-Piece(black Knight, 5, 2)
-44
-60
-64
-31
-33
-71
-73
-
 
 *************Line number=3 *************
 
 
-Piece(black Queen, 4, 3)
-33
-23
-13
-3
-53
-63
-73
-42
-41
-44
-46
-32
-21
-10
-25
-54
-65
+Piece(white Pawn, 4, 3)
 
 
 *************Line number=4 *************
 
 
+Piece(black Pawn, 0, 4)
+3
+
+Piece(black Pawn, 4, 4)
+
 
 *************Line number=5 *************
 
-
-Piece(black Pawn, 0, 5)
-4
-
-Piece(black Pawn, 3, 5)
-34
 
 
 *************Line number=6 *************
@@ -96,11 +97,27 @@ Piece(black Pawn, 2, 6)
 25
 24
 
-Piece(white Knight, 5, 6)
+Piece(black Pawn, 3, 6)
+35
+34
 
-Piece(black Pawn, 6, 6)
+Piece(black Pawn, 5, 6)
+55
+54
+
+Piece(white Queen, 6, 6)
+56
+46
 65
 64
+63
+62
+67
+55
+44
+33
+75
+77
 
 Piece(black Pawn, 7, 6)
 75
@@ -111,23 +128,32 @@ Piece(black Pawn, 7, 6)
 
 
 Piece(black Rook, 0, 7)
-17
 6
+5
+
+Piece(black Knight, 1, 7)
+5
+25
 
 Piece(black Bishop, 2, 7)
-36
-45
-54
-63
-72
+
+Piece(black Queen, 3, 7)
+46
+55
+64
+73
 
 Piece(black King, 4, 7)
-36
 46
-56
 
 Piece(black Bishop, 5, 7)
 46
+35
+24
+13
+2
+66
+75
 
 Piece(black Knight, 6, 7)
 55

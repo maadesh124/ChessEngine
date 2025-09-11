@@ -4,7 +4,7 @@ import King from "./Pieces/King.js";
 import Knight from "./Pieces/Knight.js";
 import Queen from "./Pieces/Queen.js";
 import Pawn from "./Pieces/Pawn.js";
-import { logAllPiece } from "./Helper.js";
+import { logAllPiece, isValid } from "./Helper.js";
 
 export default class Board {
   pieces;
@@ -67,6 +67,7 @@ export default class Board {
   }
 
   move(src, dst) {
+    if (!isValid(src) || !isValid(dst)) return Board.INVALID_MOVE;
     const piece = this.pieces[src[0]][src[1]];
     const opp = this.play === 0 ? 1 : 0;
     if (src[0] === dst[0] && src[1] === dst[1]) return Board.INVALID_MOVE;

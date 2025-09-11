@@ -59,10 +59,8 @@ async function playFromFile(path) {
 }
 
 async function main() {
-  // while (await play());
-  // rl.close();
-
-  await playFromFile("./input.txt");
+  while (await play());
+  rl.close();
 }
 
 try {

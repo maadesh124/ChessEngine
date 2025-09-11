@@ -28,7 +28,8 @@ export default class Piece {
       let cur = [this.x + dx[i], this.y + dy[i]];
       while (isValid(cur)) {
         this.attackSquares.push(cur);
-        if (board.pieces[cur[0]][cur[1]] != null) break;
+        let temp = board.pieces[cur[0]][cur[1]];
+        if (board.pieces[cur[0]][cur[1]] !== null) break;
         cur = [cur[0] + dx[i], cur[1] + dy[i]];
       }
     }
@@ -64,7 +65,8 @@ export default class Piece {
       this.moveTo(board, dst);
       const hasCheck = board.isCheck(this.color);
       this.moveTo(board, src);
-      board.pieces[dst[0]][dst[1]] = dstPiece;
+      dstPiece.moveTo(board, dst);
+      // board.pieces[dst[0]][dst[1]] = dstPiece;
       if (!hasCheck) valids.push(dst);
     }
     return valids;
