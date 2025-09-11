@@ -72,7 +72,7 @@ async function main() {
   // while (await play());
   // rl.close();
 
-  playFromFile("./input.txt");
+  playFromFile("./internals/input.txt");
 }
 
 try {
