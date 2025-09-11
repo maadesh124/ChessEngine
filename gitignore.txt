@@ -12,3 +12,5 @@ internals/input.txt
 internals/test.js
 internals/valid.txt
 internals/Visualizer.js
+gitignore.txt
+
