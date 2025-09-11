@@ -1,5 +1,12 @@
-##Dev-version
-Do not use this in projects instead use master.
-If the module has any erorrs then clone this branch and resolve the error
-It has all utilities to test the module like Driver.js Driver1.js and chalk module for ui
-whereas the master branch does not have these
+## ⚠️ Dev Version
+
+**Do not use this branch in production projects.**  
+Instead, use the **`master`** branch.
+
+The `dev-version` branch is intended for debugging and development.
+
+- Contains extra utilities for testing the module (e.g., `Driver.js`, `Driver1.js`).
+- Includes additional UI helpers such as the `chalk` module.
+- May contain experimental changes or errors.
+
+If the module has any issues, clone this branch and help resolve them.
