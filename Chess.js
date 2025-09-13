@@ -43,12 +43,19 @@ export default class Chess {
 
   getBoardState() {
     const state = Array.from({ length: 8 }, () => Array(8).fill(null));
-    for (let y = 0; y < 8; y++) {
-      for (let x = 0; x < 8; x++) {
-        const piece = this.#board.pieces[x][y];
-        state[y][x] = piece ? `${piece.constructor.name}${piece.color}` : null;
+    for (let x = 0; x < 8; x++) {
+      for (let y = 0; y < 8; y++) {
+        const piece = this.#board.pieces[x][y]; // row = y, col = x
+        state[x][y] = piece ? `${piece.type}${piece.color}` : null;
+        if (piece) console.log(`piece in boardstate${piece.type}`);
       }
     }
     return state;
+  }
+
+  getPieceColor(cur) {
+    if (this.#board.pieces[cur[0]][cur[1]] === null) return null;
+    console.log(`${cur} ${this.#board.pieces[cur[0]][cur[1]]}`);
+    return this.#board.pieces[cur[0]][cur[1]].color;
   }
 }
